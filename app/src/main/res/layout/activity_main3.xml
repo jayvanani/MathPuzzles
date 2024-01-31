@@ -20,9 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Puzzle 1 Completed"
             android:textAlignment="center"
             android:textColor="#0E0800"
+            android:id="@+id/winninglevel"
             android:textSize="40dp"
             android:textStyle="italic">
 

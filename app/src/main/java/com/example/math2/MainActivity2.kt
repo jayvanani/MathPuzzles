@@ -24,6 +24,11 @@ class MainActivity2 : AppCompatActivity() {
     lateinit var textscreen:TextView
     lateinit var clear: ImageView
     lateinit var submit:Button
+    lateinit var puzzles:ImageView
+    lateinit var level:TextView
+
+    var levels= arrayOf(R.drawable.p1,R.drawable.p2,R.drawable.p3,R.drawable.p4,R.drawable.p5,R.drawable.p6,R.drawable.p7,R.drawable.p8,R.drawable.p9,R.drawable.p10,R.drawable.p11,R.drawable.p12,R.drawable.p13,R.drawable.p14,R.drawable.p15)
+    var answers= arrayOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15")
 
 
 
@@ -45,6 +50,8 @@ class MainActivity2 : AppCompatActivity() {
         clear=findViewById(R.id.clear)
         textscreen=findViewById(R.id.textscreen)
         submit=findViewById(R.id.submit)
+        puzzles=findViewById(R.id.puzzles)
+        level=findViewById(R.id.level)
 
 
         one.setOnClickListener {
@@ -78,6 +85,10 @@ class MainActivity2 : AppCompatActivity() {
             textscreen.setText(textscreen.text.toString()+'0')
         }
 
+        var puzzleindex= intent.getIntExtra("puzzleindex",0)
+        level.setText("Level ${puzzleindex}")
+            puzzles.setImageResource(levels[puzzleindex - 1])
+
         clear.setOnClickListener{
         try {
             textscreen.setText(
@@ -90,10 +101,15 @@ class MainActivity2 : AppCompatActivity() {
 
         submit.setOnClickListener {
 
-            if(textscreen.text.toString().equals("10"))
+            if(textscreen.text.toString().equals(answers[puzzleindex-1]))
             {
-                var Intent=Intent(this@MainActivity2,MainActivity3::class.java)
-                startActivity(Intent)
+                var intent=Intent(this@MainActivity2,MainActivity3::class.java)
+
+
+                puzzleindex++
+                    intent.putExtra("puzzleindex", puzzleindex)
+
+                startActivity(intent)
             }
             else if(textscreen.text.toString().equals(""))
             {
@@ -106,6 +122,8 @@ class MainActivity2 : AppCompatActivity() {
             }
 
         }
+
+
 
 
     }
