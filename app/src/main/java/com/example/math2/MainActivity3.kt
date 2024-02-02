@@ -2,6 +2,7 @@ package com.example.math2
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.sax.StartElementListener
@@ -11,8 +12,11 @@ import android.widget.TextView
 
 class MainActivity3 : AppCompatActivity() {
 
+
     lateinit var continueee:Button
     lateinit var winninglevel:TextView
+    lateinit var mainmenu:Button
+
 
     @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,15 +25,25 @@ class MainActivity3 : AppCompatActivity() {
 
         continueee=findViewById(R.id.continueee)
         winninglevel=findViewById(R.id.winninglevel)
+        mainmenu=findViewById(R.id.mainmenu)
+
+
+
         var value=intent.getIntExtra("puzzleindex",0)
         winninglevel.setText("Level ${value-1} completed")
         continueee.setOnClickListener {
 
-
             Log.d("-----", "onCreate: $value")
-            var intent=Intent(this@MainActivity3,MainActivity2::class.java)
-              intent.putExtra("puzzleindex", value)
 
+            var intent=Intent(this@MainActivity3,MainActivity2::class.java)
+            intent.putExtra("puzzleindex", value)
+
+            startActivity(intent)
+
+        }
+        mainmenu.setOnClickListener {
+
+            intent=Intent(this@MainActivity3,MainActivity::class.java)
             startActivity(intent)
 
         }

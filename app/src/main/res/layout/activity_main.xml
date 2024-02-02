@@ -42,7 +42,7 @@
             android:layout_centerInParent="true"
             android:text="Puzzles"
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="30dp"/>
 
         <TextView
             android:id="@+id/continuee"
@@ -52,7 +52,7 @@
             android:layout_centerInParent="true"
             android:text="Continue"
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="30dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             android:id="@+id/buypro"
             android:layout_centerInParent="true"
             android:textColor="@color/white"
-            android:textSize="30dp"></TextView>
+            android:textSize="30dp"/>
 
     </RelativeLayout>
 
@@ -114,7 +114,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="vertical"
 
             >
@@ -122,20 +122,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="horizontal"
-                android:paddingTop="20dp"
+
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_margin="5dp"
 
                     >
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:src="@drawable/send"
+                        android:src="@drawable/share"
                         >
 
                     </ImageView>
@@ -145,6 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_margin="5dp"
 
                     >
                     <ImageView
@@ -168,7 +170,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:src="@drawable/privacypolicy"
+                    android:src="@drawable/privacy"
 
                     >
 
