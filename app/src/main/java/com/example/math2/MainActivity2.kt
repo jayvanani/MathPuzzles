@@ -1,6 +1,7 @@
 package com.example.math2
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -26,6 +27,11 @@ class MainActivity2 : AppCompatActivity() {
     lateinit var submit: Button
     lateinit var puzzles: ImageView
     lateinit var level: TextView
+    lateinit var next: ImageView
+
+
+
+    var levelcomplete=false
 
     var levels = arrayOf(
         R.drawable.p1,
@@ -44,6 +50,12 @@ class MainActivity2 : AppCompatActivity() {
         R.drawable.p14,
         R.drawable.p15
     )
+    companion object{
+    lateinit var splevel:SharedPreferences
+    lateinit var editlevel:SharedPreferences.Editor
+
+    }
+
     var answers =
         arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15")
 
@@ -68,6 +80,10 @@ class MainActivity2 : AppCompatActivity() {
         submit = findViewById(R.id.submit)
         puzzles = findViewById(R.id.puzzles)
         level = findViewById(R.id.level)
+        next=findViewById(R.id.next)
+
+        splevel=getSharedPreferences("puzzles", MODE_PRIVATE)
+        editlevel= splevel.edit()
 
 
         one.setOnClickListener {
@@ -101,10 +117,12 @@ class MainActivity2 : AppCompatActivity() {
             textscreen.setText(textscreen.text.toString() + '0')
         }
 
+
+
         var puzzleindex = intent.getIntExtra("puzzleindex", 0)
         level.setText("Level ${puzzleindex}")
 
-        puzzles.setImageResource(levels[puzzleindex - 1])
+        puzzles.setImageResource(levels[puzzleindex-1])
 
         clear.setOnClickListener {
             try {
@@ -125,6 +143,9 @@ class MainActivity2 : AppCompatActivity() {
                 MainActivity.edit.putInt("levelboard", puzzleindex)
                 MainActivity.edit.apply()
 
+
+
+
                 intent.putExtra("puzzleindex", puzzleindex)
 
                 startActivity(intent)
@@ -134,9 +155,22 @@ class MainActivity2 : AppCompatActivity() {
                 Toast.makeText(this@MainActivity2, "Wrong", Toast.LENGTH_SHORT).show()
                 textscreen.setText("")
             }
+        }
+        next.setOnClickListener {
+
+            puzzleindex++
+
+            var intent=Intent(this@MainActivity2,this@MainActivity2::class.java)
+
+            MainActivity.edit.putInt("levelboard", puzzleindex)
+            MainActivity.edit.apply()
+
+            intent.putExtra("puzzleindex", puzzleindex)
+
+            startActivity(intent)
+
 
         }
-
 
     }
 }

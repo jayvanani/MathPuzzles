@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         sp = getSharedPreferences("level", MODE_PRIVATE)
         edit = sp.edit()
 
-        i = sp.getInt("levelboard", 0)
+        i = sp.getInt("levelboard", 1)
 
 
 
