@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gameplaybackground"
-    tools:context=".MainActivity2">
+    tools:context=".GamePage">
 
     <LinearLayout
         android:id="@+id/levell"

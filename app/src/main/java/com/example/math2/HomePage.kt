@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class HomePage : AppCompatActivity() {
     companion object {
         lateinit var sp: SharedPreferences
         lateinit var edit: SharedPreferences.Editor
 
+        var skip = "skip"
+        var lock = "lock"
+        var complete = " complete"
     }
 
     lateinit var continuee: TextView
@@ -19,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     var i = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.homepage)
 
 
         continuee = findViewById(R.id.continuee)
@@ -30,17 +33,25 @@ class MainActivity : AppCompatActivity() {
 
         i = sp.getInt("levelboard", 1)
 
+        for (i in 0 until  50)
+        {
+            if(sp.getString("level$i", lock).equals(lock)) {
+                edit.putString("level$i", lock)
+                edit.apply()
+            }
+        }
+
+
 
 
         continuee.setOnClickListener {
 
-            var Intent = Intent(this@MainActivity, MainActivity2::class.java)
+            var Intent = Intent(this@HomePage, GamePage::class.java)
             Intent.putExtra("puzzleindex", i)
             startActivity(Intent)
         }
         puzzle.setOnClickListener {
-
-            var Intent = Intent(this@MainActivity, MainActivity4::class.java)
+            var Intent = Intent(this@HomePage, Puzzles::class.java)
             startActivity(Intent)
         }
 

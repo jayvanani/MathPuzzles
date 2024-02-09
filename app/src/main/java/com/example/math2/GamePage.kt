@@ -1,7 +1,6 @@
 package com.example.math2
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -9,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity2 : AppCompatActivity() {
+class GamePage : AppCompatActivity() {
 
 
     lateinit var one: Button
@@ -50,11 +49,6 @@ class MainActivity2 : AppCompatActivity() {
         R.drawable.p14,
         R.drawable.p15
     )
-    companion object{
-    lateinit var splevel:SharedPreferences
-    lateinit var editlevel:SharedPreferences.Editor
-
-    }
 
     var answers =
         arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15")
@@ -62,7 +56,7 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.gamepage)
 
 
         one = findViewById(R.id.one)
@@ -82,8 +76,6 @@ class MainActivity2 : AppCompatActivity() {
         level = findViewById(R.id.level)
         next=findViewById(R.id.next)
 
-        splevel=getSharedPreferences("puzzles", MODE_PRIVATE)
-        editlevel= splevel.edit()
 
 
         one.setOnClickListener {
@@ -136,39 +128,38 @@ class MainActivity2 : AppCompatActivity() {
         submit.setOnClickListener {
 
             if (textscreen.text.toString().equals(answers[puzzleindex - 1])) {
-                var intent = Intent(this@MainActivity2, MainActivity3::class.java)
 
+                var intent = Intent(this@GamePage, WinningPage::class.java)
+                HomePage.edit.putString("level${puzzleindex-1}",HomePage.complete)
                 puzzleindex++
-
-                MainActivity.edit.putInt("levelboard", puzzleindex)
-                MainActivity.edit.apply()
-
-
-
-
+                HomePage.edit.putInt("levelboard", puzzleindex)
+                HomePage.edit.apply()
                 intent.putExtra("puzzleindex", puzzleindex)
-
                 startActivity(intent)
+
+
             } else if (textscreen.text.toString().equals("")) {
-                Toast.makeText(this@MainActivity2, "Please Enter Answer", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@GamePage, "Please Enter Answer", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this@MainActivity2, "Wrong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@GamePage, "Wrong", Toast.LENGTH_SHORT).show()
                 textscreen.setText("")
             }
         }
         next.setOnClickListener {
 
-            puzzleindex++
 
-            var intent=Intent(this@MainActivity2,this@MainActivity2::class.java)
+            if(HomePage.sp.getString("level${puzzleindex-1}",HomePage.complete).equals(HomePage.lock)) {
 
-            MainActivity.edit.putInt("levelboard", puzzleindex)
-            MainActivity.edit.apply()
+                var intent = Intent(this@GamePage, this@GamePage::class.java)
 
-            intent.putExtra("puzzleindex", puzzleindex)
+                HomePage.edit.putString("level${puzzleindex - 1}", HomePage.skip)
 
-            startActivity(intent)
-
+                puzzleindex++
+                HomePage.edit.putInt("levelboard",puzzleindex)
+                HomePage.edit.apply()
+                intent.putExtra("puzzleindex",puzzleindex)
+                startActivity(intent)
+            }
 
         }
 

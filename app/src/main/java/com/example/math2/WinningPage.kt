@@ -2,15 +2,13 @@ package com.example.math2
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.sax.StartElementListener
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 
-class MainActivity3 : AppCompatActivity() {
+class WinningPage : AppCompatActivity() {
 
 
     lateinit var continueee:Button
@@ -21,7 +19,7 @@ class MainActivity3 : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main3)
+        setContentView(R.layout.winningpage)
 
         continueee=findViewById(R.id.continueee)
         winninglevel=findViewById(R.id.winninglevel)
@@ -30,12 +28,13 @@ class MainActivity3 : AppCompatActivity() {
 
 
         var value=intent.getIntExtra("puzzleindex",0)
+
         winninglevel.setText("Level ${value-1} completed")
         continueee.setOnClickListener {
 
             Log.d("-----", "onCreate: $value")
 
-            var intent=Intent(this@MainActivity3,MainActivity2::class.java)
+            var intent=Intent(this@WinningPage,GamePage::class.java)
             intent.putExtra("puzzleindex", value)
 
             startActivity(intent)
@@ -43,7 +42,7 @@ class MainActivity3 : AppCompatActivity() {
         }
         mainmenu.setOnClickListener {
 
-            intent=Intent(this@MainActivity3,MainActivity::class.java)
+            intent=Intent(this@WinningPage,HomePage::class.java)
             startActivity(intent)
 
         }
